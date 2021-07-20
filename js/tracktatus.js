@@ -21,7 +21,6 @@ genTlp = () => {
 
             $('.animation').classList.toggle('active');
             $('#tlp').innerHTML = content;
-            $('.animation').classList.toggle('false');
 
             
         });
