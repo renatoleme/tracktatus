@@ -19,7 +19,10 @@ genTlp = () => {
 
             let content = data.children[random].content.en + "<p>(TLP, " + (random + 1) + ")</p>";
             
-            $('#tlp').innerHTML = content;
+            console.log(random);
+            console.log(content);
+            
+            document.getElementById("tlp").innerHTML = content;
             
             
         });
