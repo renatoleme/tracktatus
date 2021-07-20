@@ -8,7 +8,6 @@ function getRandomInt(min, max) {
 
 genTlp = () => {
 
-    console.log(window.href)
     
     fetch("widgets/Tracktatus/data/tractatus.json")
         .then(response => response.json())
@@ -25,7 +24,6 @@ genTlp = () => {
             
         })
         .finally(res => {
-            document.querySelector('p.animation').classList.toggle('active');
         });
 }
 
