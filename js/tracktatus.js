@@ -10,7 +10,7 @@ genTlp = () => {
 
     console.log(window.href)
     
-    fetch("data/tractatus.json")
+    fetch("widgets/Tracktatus/data/tractatus.json")
         .then(response => response.json())
         .then(json => {
             
