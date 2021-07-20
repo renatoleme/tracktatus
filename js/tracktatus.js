@@ -24,6 +24,9 @@ genTlp = () => {
             
         })
         .finally(res => {
+            setTimeout(function(){
+                 document.querySelector('p.animation').classList.toggle('active');
+            }, 2000);
         });
 }
 
