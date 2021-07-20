@@ -18,10 +18,10 @@ genTlp = () => {
             let random = getRandomInt(0, 7);
 
             let content = data.children[random].content.en + "<p>(TLP, " + (random + 1) + ")</p>";
-
-           
+            
             $('#tlp').innerHTML = content;
-
+            
+            
         });
 }
 
