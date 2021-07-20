@@ -15,6 +15,7 @@ fetch("data/tractatus.json")
 
         let content = data.children[random].content.en;
 
+        console.log("asdadsa");
         console.log(random);
         console.log(content)
 
