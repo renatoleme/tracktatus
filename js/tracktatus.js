@@ -6,7 +6,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-genTlp () => {
+const genTlp () => {
     fetch("data/tractatus.json")
         .then(response => response.json())
         .then(json => {
