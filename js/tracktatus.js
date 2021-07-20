@@ -7,6 +7,9 @@ function getRandomInt(min, max) {
 }
 
 genTlp = () => {
+
+    console.log(window.href)
+    
     fetch("data/tractatus.json")
         .then(response => response.json())
         .then(json => {
