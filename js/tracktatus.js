@@ -13,8 +13,12 @@ fetch("data/tractatus.json")
         let data = json;
         let random = getRandomInt(0, 7);
 
+        let content = data.children[random].content.en;
 
         console.log(random);
-        console.log(data.children[random].content.en)
+        console.log(content)
+
+        document.getElementById("tlp").innerHTML = content;
+        
 
     });
