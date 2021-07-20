@@ -19,13 +19,12 @@ genTlp = () => {
 
             let content = data.children[random].content.en + "<p>(TLP, " + (random + 1) + ")</p>";
             
-            console.log(random);
-            console.log(content);
-            
+            document.querySelector('p.animation').classList.toggle('active');
             document.getElementById("tlp").innerHTML = content;
             
             
-        });
+        })
+        .then(() => document.querySelector('p.animation').classList.toggle('active'););
 }
 
 genTlp();
