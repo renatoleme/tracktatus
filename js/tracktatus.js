@@ -19,10 +19,9 @@ genTlp = () => {
 
             let content = data.children[random].content.en + "<p>(TLP, " + (random + 1) + ")</p>";
 
-            $('.animation').classList.toggle('active');
+            $('#animation').classList.toggle('active'); 
             $('#tlp').innerHTML = content;
 
-            
         });
 }
 
