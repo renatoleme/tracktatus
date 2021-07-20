@@ -13,11 +13,10 @@ fetch("data/tractatus.json")
         let data = json;
         let random = getRandomInt(0, 7);
 
-        let content = data.children[random].content.en;
+        let content = data.children[random].content.en + "<p>(TLP, " + random + ")</p>";
 
-        console.log("asdadsa");
         console.log(random);
-        console.log(content)
+        console.log(content);
 
         document.getElementById("tlp").innerHTML = content;
         
