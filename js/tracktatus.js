@@ -9,7 +9,7 @@ function getRandomInt(min, max) {
 genTlp = () => {
 
     
-    fetch("widgets/Tracktatus/data/tractatus.json")
+    fetch("widgets/tracktatus/data/tractatus.json")
         .then(response => response.json())
         .then(json => {
             
