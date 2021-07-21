@@ -6,7 +6,7 @@ const Tracktatus = {
             tlp_lang: "de",
             refresh: false,
             tlpBox: {
-                margin: '20px',
+                margin: '30px',
                 padding: '4px',
                 background: 'black',
                 color: 'white',
