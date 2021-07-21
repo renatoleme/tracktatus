@@ -17,6 +17,8 @@ genTlp = (config) => {
     const elid = config.id;
     const index = getRandomInt(0, 7);
 
+ 
+
     fetch(path)
         .then(response => response.json())
         .then(json => {
@@ -25,6 +27,6 @@ genTlp = (config) => {
             const content = data.children[index].content.en + "<p>(TLP, " + (index + 1) + ")</p>";
             
             document.getElementById(elid).innerHTML = content;
-            
+
         });
 }

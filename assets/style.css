@@ -1,0 +1,18 @@
+
+
+.tlp-enter-active {
+    animation-duration: 2s;
+    animation-name: slidein;
+}
+      
+@keyframes slidein {
+    from {
+        transform: translateX(100px);
+        opacity: 0.1;
+    }
+          
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
