@@ -30,10 +30,13 @@
 .button-lang {
     margin: 4px;
     padding: 4px;
-    background-color: #303930;
+    width: 40px;
+    height: 40px;
+    background-color: #0e69a2;
     color: white;
     border-radius: 50%;
-    box-shadow: 0 0 6px white;
+    box-shadow: 0 0 6px darkblue;
     border: none;
+    font-size: 16px;
     cursor: pointer;
 }

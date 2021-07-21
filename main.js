@@ -10,7 +10,8 @@ const Tracktatus = {
                 padding: '4px',
                 background: 'black',
                 color: 'white',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                boxShadow: '0 0 6px darkgrey'
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -27,7 +28,7 @@ const Tracktatus = {
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
                 <button class="button-lang" v-on:click="changeLang('en')">en</button>
                 <div :style="tlpRefresh">
-                    <button v-on:click="getTlp" class="button-refresh"><i class="fas fa-sync fa-lg"></i></button>
+                    <button v-on:click="getTlp" class="button-refresh"><i class="fas fa-sync fa-2x"></i></button>
                 </div>
             </div>
            <transition name="tlp">
