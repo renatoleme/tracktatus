@@ -16,3 +16,24 @@
         opacity: 1;
     }
 }
+
+.button-refresh {
+    color: white;
+    border: none;
+    margin: 2px;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.button-lang {
+    margin: 4px;
+    padding: 4px;
+    background-color: #303930;
+    color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px white;
+    border: none;
+    cursor: pointer;
+}
