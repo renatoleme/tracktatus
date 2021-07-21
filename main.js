@@ -11,7 +11,7 @@ const Tracktatus = {
                 background: 'black',
                 color: 'white',
                 overflow: 'hidden',
-                boxShadow: '4px 4px 6px darkgrey',
+                boxShadow: '4px 4px 16px  black',
                 borderRadius: '4px'
             },
             tlpRefresh: {
@@ -23,7 +23,7 @@ const Tracktatus = {
             },
             tlpContent: {
                 marginBottom: '50px',
-                fontSize: '32px'
+                fontSize: '20px'
             }
         }
     },
