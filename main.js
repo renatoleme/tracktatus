@@ -11,7 +11,8 @@ const Tracktatus = {
                 background: 'black',
                 color: 'white',
                 overflow: 'hidden',
-                boxShadow: '0 0 6px darkgrey'
+                boxShadow: '4px 4px 6px darkgrey',
+                borderRadius: '4px'
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -20,6 +21,10 @@ const Tracktatus = {
                 display: 'flex',
                 justifyContent: 'flex-start'
             },
+            tlpContent: {
+                marginBottom: '50px',
+                fontSize: '32px'
+            }
         }
     },
     template:
@@ -31,16 +36,18 @@ const Tracktatus = {
                     <button v-on:click="getTlp" class="button-refresh"><i class="fas fa-sync fa-2x"></i></button>
                 </div>
             </div>
-           <transition name="tlp">
-           <div v-if="refresh">
-                <p v-if="tlp_lang === 'de'" v-html="tlp_de"></p>
-                <p v-else v-html="tlp_en"></p>
+           <div :style="tlpContent">
+             <transition name="tlp">
+             <div v-if="refresh">
+                  <p v-if="tlp_lang === 'de'" v-html="tlp_de"></p>
+                  <p v-else v-html="tlp_en"></p>
+             </div>
+             <div v-else>
+                  <p v-if="tlp_lang === 'de'" v-html="tlp_de"></p>
+                  <p v-else v-html="tlp_en"></p>
+             </div>
+             </transition>
            </div>
-           <div v-else>
-                <p v-if="tlp_lang === 'de'" v-html="tlp_de"></p>
-                <p v-else v-html="tlp_en"></p>
-           </div>
-           </transition>
          </div>`,
     mounted() {
             this.refresh = !this.refresh;
