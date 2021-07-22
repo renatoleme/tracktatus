@@ -6,16 +6,6 @@ const app = Vue.createApp({
             diffY: 0
         }
     },
-    template:
-`
-            <div class="container" @mousemove="mouseMove($event)" @mouseup="moveEnd">
-        <h1>Tracktatus.js</h1>
-
-     <tracktatus class="tlp-widget" ref="tbox" v-on:move-start="moveStart"/>
-
-</div>
-`,
-    
     methods: {
         moveEnd() {
             this.isWindowMoving = false;

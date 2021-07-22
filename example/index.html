@@ -14,11 +14,15 @@
      }
     </style>
     <body>
-
-
-        
         <div id="app">
             
+            <div class="container" @mousemove="mouseMove($event)" @mouseup="moveEnd">
+                
+                <h1>Tracktatus.jss</h1>
+
+                <tracktatus class="tlp-widget" ref="tbox" v-on:move-start="moveStart"/>
+                
+            </div>
             
         </div>
         
