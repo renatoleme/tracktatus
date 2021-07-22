@@ -12,7 +12,9 @@ const Tracktatus = {
                 color: 'white',
                 overflow: 'hidden',
                 boxShadow: '4px 4px 16px  black',
-                borderRadius: '4px'
+                borderRadius: '4px',
+                display: 'flex',
+                flexDirection: 'column'
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -22,8 +24,15 @@ const Tracktatus = {
                 justifyContent: 'flex-start'
             },
             tlpContent: {
-                marginBottom: '50px',
-                fontSize: '20px'
+                padding: '8px',
+                fontSize: '20px',
+                color: 'white'
+            },
+            tlpCredits: {
+                marginLeft: 'auto',
+                padding: '8px',
+                textDecoration: 'none',
+                color: 'gray'
             }
         }
     },
@@ -48,6 +57,8 @@ const Tracktatus = {
              </div>
              </transition>
            </div>
+
+           <a :style="tlpCredits" href="https://github.com/renatoleme/tracktatus"><i>tracktatus.js</i></a>
          </div>`,
     mounted() {
             this.refresh = !this.refresh;
@@ -65,9 +76,30 @@ const Tracktatus = {
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min;
         },
+        goDeep(data) {
+
+            if (data.children.length !== 0) {
+                const index = this.getRandomInt(0, Object.keys(data.children).length);
+                if (index === 0) {
+                    const content_de = data.content.de + "<br/>(TLP, " + data.key + ")";
+                    const content_en = data.content.en + "<br/>(TLP, " + data.key + ")";
+                    this.tlp_de = content_de;
+                    this.tlp_en = content_en;
+                }
+                this.goDeep(data.children[index])
+            }
+            else {
+                const content_de = data.content.de + "<br/>(TLP, " + data.key + ")";
+                const content_en = data.content.en + "<br/>(TLP, " + data.key + ")";
+                this.tlp_de = content_de;
+                this.tlp_en = content_en;
+            }
+            
+        },
         getTlp() {
 
             this.refresh = !this.refresh;
+            
             const index = this.getRandomInt(0, 7);
 
             fetch('widgets/tracktatus/data/tractatus.json')
@@ -78,9 +110,9 @@ const Tracktatus = {
 
                     const content_de = data.children[index].content.de + "<p>(TLP, " + (index + 1) + ")</p>";
                     const content_en = data.children[index].content.en + "<p>(TLP, " + (index + 1) + ")</p>";
+                    
+                    this.goDeep(data.children[index])
 
-                    this.tlp_de = content_de;
-                    this.tlp_en = content_en;
 
                 });
         }
