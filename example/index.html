@@ -14,20 +14,23 @@
      }
     </style>
     <body>
-        <center>
-            <h1>Tracktatus.js</h1>
 
-            <!-- Here is the location where you choose to mount the widget -->
-            <div id="tlp-widget" /> 
 
-        </center>
-
-        <!-- Here is where you import the main.js file of the widget -->
-        <script src="widgets/tracktatus/main.js"></script>
         
-        <!-- Here is where you mount the widget -->
+        <div id="app">
+            
+            
+        </div>
+        
+        <script src="widgets/tracktatus/main.js"></script>
+
+        <script src="widgets/tracktatus/components/tracktatus.js"></script> 
+        
         <script>
-         Vue.createApp(Tracktatus).mount('#tlp-widget')
+         
+         app.mount('#app')
+
+         
         </script>
     </body>
 </html>

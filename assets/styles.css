@@ -1,4 +1,10 @@
 
+.container {
+    background-color: transparent;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
 
 .tlp-enter-active {
     animation-duration: 2s;
