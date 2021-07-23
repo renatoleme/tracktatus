@@ -40,8 +40,8 @@ app.component('tracktatus', {
         }
     },
     template:
-    `<div :style="tlpBox" @mousedown="moveStart($event)" ref="tbox">
-            <div :style="tlpSelectors">
+    `<div :style="tlpBox" @mousedown="moveStart($event)" ref="tbox" id="clickable">
+            <div :style="tlpSelectors" id="clickable">
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
                 <button class="button-lang" v-on:click="changeLang('en')">en</button>
                 <div :style="tlpRefresh">
@@ -72,7 +72,7 @@ app.component('tracktatus', {
     },
     methods: {
         moveStart(event) {
-            if (event.toElement.nodeName === "DIV") {
+            if (event.target.id === "clickable") {
                 const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft}
                 this.$emit('move-start', info)
             }
