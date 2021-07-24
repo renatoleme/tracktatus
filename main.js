@@ -7,6 +7,12 @@ const app = Vue.createApp({
         }
     },
     methods: {
+        minimizeWindow() {
+            console.log('[main.js] Tracktatus')
+            this.$refs.vtasks
+            this.$emit('caraio')
+            this.$el.parentNode.appendChild(this.$refs.container);
+        },
         moveEnd() {
             this.isWindowMoving = false;
         },

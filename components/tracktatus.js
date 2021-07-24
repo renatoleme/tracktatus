@@ -1,14 +1,18 @@
 app.component('tracktatus', {
+    props: {
+        taskId: String
+    },
     data() {
         return {
+            visible: false,
             tlp_en : "",
             tlp_de : "",
             tlp_lang: "de",
             refresh: false,
             tlpBox: {
                 width: '500px',
-                marginTop: 10,
-                marginLeft: 10,
+                marginTop: 20,
+                marginLeft: 110,
                 padding: '4px',
                 background: 'black',
                 color: 'white',
@@ -16,7 +20,8 @@ app.component('tracktatus', {
                 boxShadow: '4px 4px 16px  black',
                 borderRadius: '4px',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                position: 'absolute'
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -40,7 +45,9 @@ app.component('tracktatus', {
         }
     },
     template:
-    `<div :style="tlpBox" @mousedown="moveStart($event)" ref="tbox" id="clickable">
+    `
+<transition name="tlpWindow">
+<div v-if="visible" :style="tlpBox" @mousedown="moveStart($event)"  id="clickable" @dblclick="doAction($event)">
             <div :style="tlpSelectors" id="clickable">
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
                 <button class="button-lang" v-on:click="changeLang('en')">en</button>
@@ -62,18 +69,32 @@ app.component('tracktatus', {
            </div>
 
            <a :style="tlpCredits" href="https://github.com/renatoleme/tracktatus"><i>tracktatus.js</i></a>
-         </div>`,
+         </div>
+</transition>`,
     mounted() {
         this.refresh = !this.refresh;
-
+        this.minimizeWindow()
     },
     created: function () {
         this.getTlp();
     },
     methods: {
+        openWindow() {
+            this.visible = true
+        },
+        minimizeWindow() {
+            this.$emit('minimize-window', {trigger: this.openWindow, name: 'Tracktatus', icon: 'widgets/tracktatus/assets/imgs/icon.png'})
+            this.visible = false
+        },
+        doAction(event) {
+            if (event.type === "dblclick" && event.target.id === "clickable") {
+                this.minimizeWindow()
+            }
+            
+        },
         moveStart(event) {
             if (event.target.id === "clickable") {
-                const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft}
+                const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft, ref: this.$props.taskId}
                 this.$emit('move-start', info)
             }
         },

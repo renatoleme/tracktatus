@@ -4,12 +4,49 @@
     position: fixed;
     height: 100%;
     width: 100%;
-    z-index: 9;
 }
+
+
+
+.tlpWindow-enter-active {
+    animation-duration: 0.3s;
+    animation-name: maximize;
+}
+
+.tlpWindow-leave-active {
+    animation-duration: 0.3s;
+    animation-name: minimize;
+}
+
+
 
 .tlp-enter-active {
     animation-duration: 2s;
     animation-name: slidein;
+}
+
+@keyframes maximize {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+          
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes minimize {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+          
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
       
 @keyframes slidein {
@@ -46,6 +83,7 @@
     border: none;
     font-size: 16px;
     cursor: pointer;
+
 }
 
 a {
