@@ -21,7 +21,8 @@ app.component('tracktatus', {
                 borderRadius: '4px',
                 display: 'flex',
                 flexDirection: 'column',
-                position: 'absolute'
+                position: 'absolute',
+                opacity: 1
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -73,12 +74,19 @@ app.component('tracktatus', {
 </transition>`,
     mounted() {
         this.refresh = !this.refresh;
-        this.minimizeWindow()
+        this.minimizeWindow();
+
+        
     },
     created: function () {
+        
+
         this.getTlp();
     },
     methods: {
+        setOpacity(opacity) {
+            this.tlpBox.opacity = opacity
+        },
         openWindow() {
             this.visible = true
         },
@@ -95,6 +103,7 @@ app.component('tracktatus', {
         moveStart(event) {
             if (event.target.id === "clickable") {
                 const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft, ref: this.$props.taskId}
+                this.setOpacity (0.5)
                 this.$emit('move-start', info)
             }
         },
