@@ -4,7 +4,7 @@ app.component('tracktatus', {
     },
     data() {
         return {
-            visible: false,
+            visible: true,
             tlp_en : "",
             tlp_de : "",
             tlp_lang: "de",
@@ -53,7 +53,9 @@ app.component('tracktatus', {
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
                 <button class="button-lang" v-on:click="changeLang('en')">en</button>
                 <div :style="tlpRefresh">
-                    <button v-on:click="getTlp" class="button-refresh"><i class="fas fa-sync fa-2x"></i></button>
+                    <button v-on:click="getTlp" class="btn-action button-refresh"><i class="fas fa-sync fa-lg"></i></button>
+                    <button v-on:click="minimizeWindow" class="btn-action"><i class="fas fa-window-minimize fa-lg"></i></button>
+                    <button v-on:click="closeWindow" class="btn-action"><i class="fas fa-times fa-lg"></i></button>
                 </div>
             </div>
            <div :style="tlpContent">
@@ -74,8 +76,6 @@ app.component('tracktatus', {
 </transition>`,
     mounted() {
         this.refresh = !this.refresh;
-        this.minimizeWindow();
-
         
     },
     created: function () {
@@ -84,6 +84,9 @@ app.component('tracktatus', {
         this.getTlp();
     },
     methods: {
+        closeWindow(event) {
+            this.$emit('close-window', this.$props.taskId)
+        },
         setOpacity(opacity) {
             this.tlpBox.opacity = opacity
         },
