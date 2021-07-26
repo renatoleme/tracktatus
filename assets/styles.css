@@ -8,12 +8,12 @@
 
 
 
-.tlpWindow-enter-active {
+.genericWindow-enter-active {
     animation-duration: 0.3s;
     animation-name: maximize;
 }
 
-.tlpWindow-leave-active {
+.genericWindow-leave-active {
     animation-duration: 0.3s;
     animation-name: minimize;
 }

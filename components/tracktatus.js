@@ -4,6 +4,7 @@ app.component('tracktatus', {
     },
     data() {
         return {
+            refname: 'tbox',
             visible: true,
             tlp_en : "",
             tlp_de : "",
@@ -47,7 +48,7 @@ app.component('tracktatus', {
     },
     template:
     `
-<transition name="tlpWindow">
+<transition name="genericWindow">
 <div v-if="visible" :style="tlpBox" @mousedown="moveStart($event)"  id="clickable" @dblclick="doAction($event)">
             <div :style="tlpSelectors" id="clickable">
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
@@ -85,7 +86,7 @@ app.component('tracktatus', {
     },
     methods: {
         closeWindow(event) {
-            this.$emit('close-window', this.$props.taskId)
+            this.$emit('close-window', {taskId: this.$props.taskId, ref: this.refname})
         },
         setOpacity(opacity) {
             this.tlpBox.opacity = opacity
