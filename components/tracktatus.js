@@ -1,6 +1,7 @@
 app.component('tracktatus', {
     props: {
-        taskId: String
+        taskId: String,
+        zIndex: Number
     },
     data() {
         return {
@@ -23,7 +24,8 @@ app.component('tracktatus', {
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'absolute',
-                opacity: 1
+                opacity: 1,
+                zIndex: 1
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -81,10 +83,14 @@ app.component('tracktatus', {
     },
     created: function () {
         
-
+        this.tlpBox.zIndex = this.$props.zIndex
         this.getTlp();
+        
     },
     methods: {
+        changeZIndex(val) {
+           this.tlpBox.zIndex = val 
+        },
         closeWindow(event) {
             this.$emit('close-window', {taskId: this.$props.taskId, ref: this.refname})
         },
