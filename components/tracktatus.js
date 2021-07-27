@@ -87,7 +87,9 @@ app.component('tracktatus', {
         
     },
     created: function () {
-        
+        if (this.$props.minimized) {
+            this.visible = false
+        }
         this.tlpBox.zIndex = this.$props.zIndex
         this.getTlp();
      
