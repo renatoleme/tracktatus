@@ -1,7 +1,8 @@
 app.component('tracktatus', {
     props: {
         taskId: String,
-        zIndex: Number
+        zIndex: Number,
+        minimized: Boolean
     },
     data() {
         return {
@@ -79,13 +80,17 @@ app.component('tracktatus', {
 </transition>`,
     mounted() {
         this.refresh = !this.refresh;
+  
+        if (this.$props.minimized) {
+            this.minimizeWindow()
+        }
         
     },
     created: function () {
         
         this.tlpBox.zIndex = this.$props.zIndex
         this.getTlp();
-        
+     
     },
     methods: {
         changeZIndex(val) {
@@ -101,7 +106,7 @@ app.component('tracktatus', {
             this.visible = true
         },
         minimizeWindow() {
-            this.$emit('minimize-window', {trigger: this.openWindow, name: 'Tracktatus', icon: 'widgets/tracktatus/assets/imgs/icon.png'})
+            this.$emit('minimize-window', {trigger: this.openWindow, name: 'Tracktatus', icon: 'widgets/tracktatus/assets/imgs/icon.png', taskId: this.$props.taskId})
             this.visible = false
         },
         doAction(event) {
@@ -111,8 +116,9 @@ app.component('tracktatus', {
             
         },
         moveStart(event) {
+            const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft, ref: this.$props.taskId}
+            this.$emit('set-focus', info)
             if (event.target.id === "clickable") {
-                const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft, ref: this.$props.taskId}
                 this.setOpacity (0.5)
                 this.$emit('move-start', info)
             }
