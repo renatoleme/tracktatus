@@ -4,12 +4,49 @@
     position: fixed;
     height: 100%;
     width: 100%;
-    z-index: 9;
 }
+
+
+
+.genericWindow-enter-active {
+    animation-duration: 0.3s;
+    animation-name: maximize;
+}
+
+.genericWindow-leave-active {
+    animation-duration: 0.3s;
+    animation-name: minimize;
+}
+
+
 
 .tlp-enter-active {
     animation-duration: 2s;
     animation-name: slidein;
+}
+
+@keyframes maximize {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+          
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes minimize {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+          
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
       
 @keyframes slidein {
@@ -24,7 +61,7 @@
     }
 }
 
-.button-refresh {
+.btn-action {
     color: white;
     border: none;
     margin: 2px;
@@ -32,6 +69,13 @@
     outline: none;
     cursor: pointer;
     padding: 4px;
+}
+
+
+.button-refresh:active {
+    transform: rotate(360deg);
+    transition-duration: 0.5s;
+    transition-property: transform;
 }
 
 .button-lang {

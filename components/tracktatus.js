@@ -1,14 +1,21 @@
 app.component('tracktatus', {
+    props: {
+        taskId: String,
+        zIndex: Number,
+        minimized: Boolean
+    },
     data() {
         return {
+            refname: 'tbox',
+            visible: true,
             tlp_en : "",
             tlp_de : "",
             tlp_lang: "de",
             refresh: false,
             tlpBox: {
                 width: '500px',
-                marginTop: 10,
-                marginLeft: 10,
+                marginTop: '20px',
+                marginLeft: '110px',
                 padding: '4px',
                 background: 'black',
                 color: 'white',
@@ -16,7 +23,10 @@ app.component('tracktatus', {
                 boxShadow: '4px 4px 16px  black',
                 borderRadius: '4px',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                position: 'absolute',
+                opacity: 1,
+                zIndex: 1
             },
             tlpRefresh: {
                 marginLeft: 'auto'
@@ -40,12 +50,16 @@ app.component('tracktatus', {
         }
     },
     template:
-    `<div :style="tlpBox" @mousedown="moveStart($event)" ref="tbox" id="clickable">
+    `
+<transition name="genericWindow">
+<div v-if="visible" :style="tlpBox" @mousedown="moveStart($event)"  id="clickable" @dblclick="doAction($event)">
             <div :style="tlpSelectors" id="clickable">
                 <button class="button-lang" v-on:click="changeLang('de')">de</button>
                 <button class="button-lang" v-on:click="changeLang('en')">en</button>
                 <div :style="tlpRefresh">
-                    <button v-on:click="getTlp" class="button-refresh"><i class="fas fa-sync fa-2x"></i></button>
+                    <button v-on:click="getTlp" class="btn-action button-refresh"><i class="fas fa-sync fa-lg"></i></button>
+                    <button v-on:click="minimizeWindow" class="btn-action"><i class="fas fa-window-minimize fa-lg"></i></button>
+                    <button v-on:click="closeWindow" class="btn-action"><i class="fas fa-times fa-lg"></i></button>
                 </div>
             </div>
            <div :style="tlpContent">
@@ -62,24 +76,59 @@ app.component('tracktatus', {
            </div>
 
            <a :style="tlpCredits" href="https://github.com/renatoleme/tracktatus"><i>tracktatus.js</i></a>
-         </div>`,
+         </div>
+</transition>`,
     mounted() {
         this.refresh = !this.refresh;
-
+  
+        if (this.$props.minimized) {
+            this.minimizeWindow()
+        }
+        
     },
     created: function () {
+        if (this.$props.minimized) {
+            this.visible = false
+        }
+        this.tlpBox.zIndex = this.$props.zIndex
         this.getTlp();
+     
     },
     methods: {
+        changeZIndex(val) {
+           this.tlpBox.zIndex = val 
+        },
+        closeWindow(event) {
+            this.$emit('close-window', {taskId: this.$props.taskId, ref: this.refname})
+        },
+        setOpacity(opacity) {
+            this.tlpBox.opacity = opacity
+        },
+        openWindow() {
+            this.visible = true
+        },
+        minimizeWindow() {
+            this.$emit('minimize-window', {trigger: this.openWindow, name: 'Tracktatus', icon: 'widgets/tracktatus/assets/imgs/icon.png', taskId: this.$props.taskId})
+            this.visible = false
+        },
+        doAction(event) {
+            if (event.type === "dblclick" && event.target.id === "clickable") {
+                this.minimizeWindow()
+            }
+            
+        },
         moveStart(event) {
+            const info = { diffY : event.clientY - parseInt(this.tlpBox.marginTop, 10), diffX : event.clientX - parseInt(this.tlpBox.marginLeft, 10), ref: this.$props.taskId}
+            this.$emit('set-focus', info)
             if (event.target.id === "clickable") {
-                const info = { diffY : event.clientY - this.tlpBox.marginTop, diffX : event.clientX - this.tlpBox.marginLeft}
+                this.setOpacity (0.5)
                 this.$emit('move-start', info)
             }
         },
         moveWindow(event, diffX, diffY) {
-            this.tlpBox.marginTop = event.clientY - diffY;
-            this.tlpBox.marginLeft = event.clientX - diffX;
+            this.tlpBox.marginTop = (event.clientY - diffY) + 'px';
+            this.tlpBox.marginLeft = (event.clientX - diffX) + 'px';
+            console.log(event.clientY, event.clientX, diffY, diffY);
         },
         changeLang(lang) {
             this.tlp_lang = lang;
